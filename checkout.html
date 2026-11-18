@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — WasteMart</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <svg class="brand-logo-icon" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="16" fill="#10b981"/>
+          <path d="M16 8C22 8 25 13 25 18C25 24 20 25 15 25C10 25 8 21 8 16C8 11 11 8 16 8Z" fill="#ffffff"/>
+          <path d="M13 21C16 17 19 14 23 11" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        Waste<span>Mart</span>
+      </a>
+
+      <nav class="nav-menu" id="mainNav"></nav>
+
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-backdrop" id="mobileBackdrop" onclick="toggleMobileNav()"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="brand-logo">Waste<span>Mart</span></span>
+      <button class="mobile-drawer-close" onclick="toggleMobileNav()">&times;</button>
+    </div>
+    <nav class="mobile-nav-links" id="mobileNavLinks"></nav>
+  </div>
+
+  <main class="py-6">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> &gt; <a href="cart.html">Cart</a> &gt; <span>Checkout</span>
+      </div>
+
+      <h1 class="text-2xl font-bold mb-6">Complete Waste Procurement Order</h1>
+
+      <form id="checkoutForm" onsubmit="handlePlaceOrderSubmit(event)">
+        <div class="checkout-layout">
+          <!-- Left: Shipping & Payment -->
+          <div class="checkout-box">
+            <h3>Shipping &amp; Delivery Destination</h3>
+            
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="checkoutName">Full Name / Factory Representative *</label>
+                <input type="text" id="checkoutName" class="form-input" placeholder="e.g. Priya Sharma" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="checkoutPhone">Contact Phone Number *</label>
+                <input type="tel" id="checkoutPhone" class="form-input" placeholder="+91 98765 00000" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="checkoutAddress">Delivery Address / Factory Plot / Yard *</label>
+              <textarea id="checkoutAddress" rows="2" class="form-textarea" placeholder="Street, Industrial Area, Unit No..." required></textarea>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="checkoutCity">City *</label>
+                <input type="text" id="checkoutCity" class="form-input" placeholder="e.g. Bengaluru" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="checkoutState">State *</label>
+                <input type="text" id="checkoutState" class="form-input" placeholder="e.g. Karnataka" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="checkoutPincode">Postal Pincode *</label>
+              <input type="text" id="checkoutPincode" class="form-input" placeholder="e.g. 560103" required>
+            </div>
+
+            <h3 class="mt-4">Payment Method</h3>
+            <p class="text-xs text-muted mb-2">Select your preferred payment terms (Demo Simulation):</p>
+            
+            <div class="payment-options-group">
+              <label class="payment-radio-label">
+                <input type="radio" name="paymentMethod" value="Cash on Delivery" checked>
+                <div>
+                  <span>Cash on Delivery / On Weighing Scale</span>
+                  <div class="text-xs text-muted">Settle payment upon physical material verification at pickup / delivery.</div>
+                </div>
+              </label>
+
+              <label class="payment-radio-label">
+                <input type="radio" name="paymentMethod" value="Pay Later">
+                <div>
+                  <span>Pay Later (B2B Credit Invoice)</span>
+                  <div class="text-xs text-muted">15-day Net invoice terms for verified recycling corporate partners.</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Right: Order Summary -->
+          <div class="summary-card">
+            <h3>Order Summary</h3>
+            <div id="checkoutItemsList" class="mb-4">
+              <!-- Injected via js/orders.js renderCheckoutSummary() -->
+            </div>
+
+            <div class="summary-row">
+              <span>Subtotal:</span>
+              <span id="checkoutSubtotal">₹0</span>
+            </div>
+            <div class="summary-row">
+              <span>Delivery Charge:</span>
+              <span id="checkoutDelivery">₹200</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-row summary-total">
+              <span>Grand Total:</span>
+              <span class="text-green" id="checkoutTotal">₹0</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg mt-4" style="width: 100%;">
+              Place Order
+            </button>
+
+            <div class="text-center mt-3">
+              <span class="badge badge-completed">100% Safe LocalStorage Order Simulation</span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 WasteMart — "Turn Waste Into Value". All rights reserved.</p>
+        <p><a href="cart.html" class="text-green">Back to Cart</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initCheckoutPage();
+    });
+  </script>
+</body>
+</html>

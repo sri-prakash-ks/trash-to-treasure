@@ -1,0 +1,13 @@
+﻿<svg xmlns=http://www.w3.org/2000/svg viewBox=0 0 400 300 width=100% height=100%>
+  <rect width=400 height=300 fill=#faf5ff/>
+  <circle cx=200 cy=140 r=100 fill=#f3e8ff/>
+  <g transform=translate(125, 45)>
+    <!-- Stack of papers -->
+    <rect x=35 y=65 width=90 height=110 rx=3 fill=#cbd5e1 transform=rotate(12 80 120)/>
+    <rect x=25 y=55 width=90 height=110 rx=3 fill=#e2e8f0 transform=rotate(-6 70 110)/>
+    <rect x=25 y=45 width=95 height=115 rx=3 fill=#ffffff stroke=#cbd5e1 stroke-width=2/>
+    <path d=M 40 70 L 95 70 M 40 90 L 105 90 M 40 110 L 85 110 M 40 130 L 100 130 stroke=#94a3b8 stroke-width=3 stroke-linecap=round/>
+    <circle cx=100 cy=60 r=8 fill=#10b981 opacity=0.3/>
+  </g>
+  <text x=200 y=265 font-family=system-ui, sans-serif font-size=16 font-weight=700 fill=#6b21a8 text-anchor=middle>Sorted Office Paper Waste</text>
+</svg>

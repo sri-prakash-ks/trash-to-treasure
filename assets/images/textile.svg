@@ -1,0 +1,11 @@
+﻿<svg xmlns=http://www.w3.org/2000/svg viewBox=0 0 400 300 width=100% height=100%>
+  <rect width=400 height=300 fill=#fff1f2/>
+  <circle cx=200 cy=140 r=100 fill=#ffe4e6/>
+  <g transform=translate(125, 45)>
+    <!-- Textile rolls / shirt -->
+    <path d=M 40 40 L 60 25 L 90 25 L 110 40 L 98 55 L 85 48 L 85 140 L 65 140 L 65 48 L 52 55 Z fill=#e11d48/>
+    <rect x=30 y=110 width=90 height=28 rx=6 fill=#fb7185/>
+    <rect x=20 y=130 width=110 height=26 rx=6 fill=#f43f5e/>
+  </g>
+  <text x=200 y=265 font-family=system-ui, sans-serif font-size=16 font-weight=700 fill=#9f1239 text-anchor=middle>Textile &amp; Fabric Cuttings</text>
+</svg>

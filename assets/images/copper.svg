@@ -1,0 +1,18 @@
+﻿<svg xmlns=http://www.w3.org/2000/svg viewBox=0 0 400 300 width=100% height=100%>
+  <defs>
+    <linearGradient id=copGrad x1=0% y1=0% x2=100% y2=100%>
+      <stop offset=0% stop-color=#ea580c/>
+      <stop offset=50% stop-color=#f97316/>
+      <stop offset=100% stop-color=#b45309/>
+    </linearGradient>
+  </defs>
+  <rect width=400 height=300 fill=#fff7ed/>
+  <circle cx=200 cy=140 r=100 fill=#ffedd5/>
+  <g transform=translate(100, 50)>
+    <circle cx=100 cy=90 r=75 fill=none stroke=url(#copGrad) stroke-width=18/>
+    <circle cx=100 cy=90 r=50 fill=none stroke=#fb923c stroke-width=12/>
+    <circle cx=100 cy=90 r=30 fill=none stroke=#ea580c stroke-width=8/>
+    <path d=M 60 140 C 90 180, 160 170, 190 120 fill=none stroke=url(#copGrad) stroke-width=14 stroke-linecap=round/>
+  </g>
+  <text x=200 y=265 font-family=system-ui, sans-serif font-size=16 font-weight=700 fill=#9a3412 text-anchor=middle>Millberry Wire Copper Scrap</text>
+</svg>

@@ -1,0 +1,22 @@
+﻿<svg xmlns=http://www.w3.org/2000/svg viewBox=0 0 400 300 width=100% height=100%>
+  <rect width=400 height=300 fill=#f5f3ff/>
+  <circle cx=200 cy=140 r=100 fill=#ede9fe/>
+  <g transform=translate(115, 55)>
+    <!-- Circuit board background -->
+    <rect x=10 y=10 width=150 height=130 rx=8 fill=#1e1b4b/>
+    <rect x=20 y=20 width=130 height=110 rx=4 fill=#0f766e stroke=#2dd4bf stroke-width=2/>
+    <!-- IC Chip -->
+    <rect x=65 y=55 width=40 height=40 rx=4 fill=#09090b stroke=#a1a1aa stroke-width=1.5/>
+    <circle cx=72 cy=62 r=3 fill=#fbbf24/>
+    <!-- Circuit lines -->
+    <path d=M 40 35 L 40 60 L 65 60 M 130 35 L 130 75 L 105 75 M 40 115 L 65 115 L 65 95 M 130 115 L 105 115 L 105 95 stroke=#2dd4bf stroke-width=2.5 fill=none/>
+    <circle cx=40 cy=35 r=4 fill=#2dd4bf/>
+    <circle cx=130 cy=35 r=4 fill=#2dd4bf/>
+    <circle cx=40 cy=115 r=4 fill=#2dd4bf/>
+    <circle cx=130 cy=115 r=4 fill=#2dd4bf/>
+    <!-- Gold pins -->
+    <rect x=85 y=12 width=20 height=8 fill=#f59e0b/>
+    <rect x=110 y=12 width=20 height=8 fill=#f59e0b/>
+  </g>
+  <text x=200 y=265 font-family=system-ui, sans-serif font-size=16 font-weight=700 fill=#4338ca text-anchor=middle>Mixed Electronic Scrap &amp; PCBs</text>
+</svg>

@@ -1,0 +1,9 @@
+﻿<svg xmlns=http://www.w3.org/2000/svg viewBox=0 0 160 40 width=160 height=40>
+  <g transform=translate(2, 4)>
+    <!-- Eco leaf symbol inside circle -->
+    <circle cx=16 cy=16 r=16 fill=#10b981/>
+    <path d=M 16 7 C 22 7 25 12 25 18 C 25 24 20 25 15 25 C 10 25 7 21 7 15 C 7 10 11 7 16 7 Z fill=#ffffff/>
+    <path d=M 12 21 C 15 17 18 13 22 10 stroke=#10b981 stroke-width=2 stroke-linecap=round/>
+  </g>
+  <text x=44 y=27 font-family=system-ui, -apple-system, sans-serif font-size=20 font-weight=800 fill=#0f172a letter-spacing=-0.5>Waste<tspan fill=#10b981>Mart</tspan></text>
+</svg>

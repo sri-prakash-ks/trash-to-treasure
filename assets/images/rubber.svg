@@ -1,0 +1,14 @@
+﻿<svg xmlns=http://www.w3.org/2000/svg viewBox=0 0 400 300 width=100% height=100%>
+  <rect width=400 height=300 fill=#f8fafc/>
+  <circle cx=200 cy=140 r=100 fill=#e2e8f0/>
+  <g transform=translate(130, 50)>
+    <!-- Tyre -->
+    <circle cx=70 cy=85 r=65 fill=#1e293b/>
+    <circle cx=70 cy=85 r=45 fill=#f8fafc/>
+    <circle cx=70 cy=85 r=40 fill=#334155/>
+    <circle cx=70 cy=85 r=18 fill=#94a3b8/>
+    <!-- Treads -->
+    <path d=M 70 20 L 70 30 M 70 140 L 70 150 M 10 85 L 20 85 M 120 85 L 130 85 M 30 45 L 37 52 M 103 118 L 110 125 M 30 125 L 37 118 M 103 52 L 110 45 stroke=#f8fafc stroke-width=4 stroke-linecap=round/>
+  </g>
+  <text x=200 y=265 font-family=system-ui, sans-serif font-size=16 font-weight=700 fill=#1e293b text-anchor=middle>Crumb Rubber &amp; Shredded Tyres</text>
+</svg>

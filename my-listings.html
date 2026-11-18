@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Waste Listings — WasteMart</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <svg class="brand-logo-icon" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="16" fill="#10b981"/>
+          <path d="M16 8C22 8 25 13 25 18C25 24 20 25 15 25C10 25 8 21 8 16C8 11 11 8 16 8Z" fill="#ffffff"/>
+          <path d="M13 21C16 17 19 14 23 11" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        Waste<span>Mart</span>
+      </a>
+
+      <nav class="nav-menu" id="mainNav"></nav>
+
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-backdrop" id="mobileBackdrop" onclick="toggleMobileNav()"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="brand-logo">Waste<span>Mart</span></span>
+      <button class="mobile-drawer-close" onclick="toggleMobileNav()">&times;</button>
+    </div>
+    <nav class="mobile-nav-links" id="mobileNavLinks"></nav>
+  </div>
+
+  <main class="py-6">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> &gt; <a href="dashboard.html">Dashboard</a> &gt; <span>My Listings</span>
+      </div>
+
+      <div class="flex justify-between items-center mb-6 flex-wrap gap-2">
+        <div>
+          <h1 class="text-2xl font-bold">My Waste Listings</h1>
+          <p class="text-muted text-sm">Manage inventory, adjust rates, and track listing status</p>
+        </div>
+        <a href="sell.html" class="btn btn-primary btn-sm">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add New Listing
+        </a>
+      </div>
+
+      <!-- Listings Card & Table -->
+      <div class="cart-table-card">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Waste Material</th>
+                <th>Price</th>
+                <th>Available Stock</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="myListingsTableBody">
+              <!-- Injected via js/products.js renderMyListings() -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state-box" id="myListingsEmptyState" style="display: none; border: none; margin: 2rem auto;">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          </svg>
+          <h3>No waste listings yet</h3>
+          <p class="text-muted">Start monetising recyclable scrap materials by creating your first listing.</p>
+          <a href="sell.html" class="btn btn-primary mt-3">List Waste Now</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Edit Listing Modal -->
+  <div class="modal-overlay" id="editListingModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Edit Waste Listing</h3>
+        <button class="modal-close-btn" onclick="closeModal('editListingModal')">&times;</button>
+      </div>
+      <form id="editListingForm" onsubmit="saveEditedListing(event)">
+        <div class="modal-body">
+          <input type="hidden" id="editListingId">
+
+          <div class="form-group">
+            <label class="form-label" for="editWasteName">Waste Material Name</label>
+            <input type="text" id="editWasteName" class="form-input" required>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="editCategory">Category</label>
+              <select id="editCategory" class="form-select-full" required>
+                <option value="Plastic">Plastic</option>
+                <option value="Paper">Paper</option>
+                <option value="Metal">Metal</option>
+                <option value="Glass">Glass</option>
+                <option value="E-Waste">E-Waste</option>
+                <option value="Cardboard">Cardboard</option>
+                <option value="Rubber">Rubber</option>
+                <option value="Textile">Textile</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editStatus">Listing Status</label>
+              <select id="editStatus" class="form-select-full">
+                <option value="Active">Active</option>
+                <option value="Sold Out">Sold Out</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="editPrice">Price (₹)</label>
+              <input type="number" id="editPrice" class="form-input" min="1" step="any" required>
+            </div>
+
+            <div class="flex gap-2">
+              <div class="form-group" style="flex: 2;">
+                <label class="form-label" for="editQuantity">Stock</label>
+                <input type="number" id="editQuantity" class="form-input" min="0" step="any" required>
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label class="form-label" for="editUnit">Unit</label>
+                <select id="editUnit" class="form-select-full">
+                  <option value="kg">kg</option>
+                  <option value="ton">ton</option>
+                  <option value="piece">piece</option>
+                  <option value="bundle">bundle</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="editLocation">Pickup Location</label>
+            <input type="text" id="editLocation" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="editDescription">Description</label>
+            <textarea id="editDescription" class="form-textarea" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('editListingModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 WasteMart — "Turn Waste Into Value". All rights reserved.</p>
+        <p><a href="index.html" class="text-green">Back to Home</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      protectPage(['seller', 'admin']);
+      renderMyListings();
+    });
+  </script>
+</body>
+</html>

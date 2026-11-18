@@ -1,0 +1,23 @@
+﻿<svg xmlns=http://www.w3.org/2000/svg viewBox=0 0 400 300 width=100% height=100%>
+  <defs>
+    <linearGradient id=pGrad x1=0% y1=0% x2=100% y2=100%>
+      <stop offset=0% stop-color=#0284c7/>
+      <stop offset=100% stop-color=#0369a1/>
+    </linearGradient>
+  </defs>
+  <rect width=400 height=300 fill=#f0f9ff/>
+  <circle cx=200 cy=140 r=100 fill=#e0f2fe/>
+  <g transform=translate(145, 45)>
+    <rect x=35 y=30 width=50 height=140 rx=15 fill=url(#pGrad) opacity=0.85/>
+    <rect x=45 y=15 width=30 height=20 rx=4 fill=#0369a1/>
+    <rect x=42 y=10 width=36 height=8 rx=2 fill=#38bdf8/>
+    <path d=M 45 75 L 75 75 M 45 95 L 75 95 M 45 115 L 75 115 stroke=#bae6fd stroke-width=3 stroke-linecap=round/>
+    <circle cx=60 cy=140 r=12 fill=#ffffff opacity=0.4/>
+  </g>
+  <g transform=translate(195, 70) rotate(22)>
+    <rect x=25 y=30 width=42 height=110 rx=12 fill=#38bdf8 opacity=0.75/>
+    <rect x=33 y=15 width=26 height=18 rx=3 fill=#0284c7/>
+    <rect x=30 y=10 width=32 height=7 rx=2 fill=#7dd3fc/>
+  </g>
+  <text x=200 y=265 font-family=system-ui, sans-serif font-size=16 font-weight=700 fill=#0369a1 text-anchor=middle>PET Plastic Bottles &amp; Flakes</text>
+</svg>

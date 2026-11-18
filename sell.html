@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell Waste Material — WasteMart</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <svg class="brand-logo-icon" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="16" fill="#10b981"/>
+          <path d="M16 8C22 8 25 13 25 18C25 24 20 25 15 25C10 25 8 21 8 16C8 11 11 8 16 8Z" fill="#ffffff"/>
+          <path d="M13 21C16 17 19 14 23 11" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        Waste<span>Mart</span>
+      </a>
+
+      <nav class="nav-menu" id="mainNav"></nav>
+
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-backdrop" id="mobileBackdrop" onclick="toggleMobileNav()"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="brand-logo">Waste<span>Mart</span></span>
+      <button class="mobile-drawer-close" onclick="toggleMobileNav()">&times;</button>
+    </div>
+    <nav class="mobile-nav-links" id="mobileNavLinks"></nav>
+  </div>
+
+  <main class="py-6">
+    <div class="container-narrow">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> &gt; <a href="dashboard.html">Dashboard</a> &gt; <span>Sell Waste</span>
+      </div>
+
+      <div class="checkout-box mt-3">
+        <h3>List Waste Material for Sale</h3>
+        <p class="text-muted text-sm mb-4">
+          Provide accurate specifications, weight, and pricing to connect with verified recycling plants and aggregators.
+        </p>
+
+        <form id="createListingForm" onsubmit="handleCreateListingSubmit(event)">
+          <!-- Waste Name & Category -->
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="wasteName">Waste Material Name *</label>
+              <input type="text" id="wasteName" class="form-input" placeholder="e.g. Copper Scrap Millberry" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="category">Category *</label>
+              <select id="category" class="form-select-full" required onchange="handleCategoryChange(this.value)">
+                <option value="Plastic">Plastic</option>
+                <option value="Paper">Paper</option>
+                <option value="Metal">Metal</option>
+                <option value="Glass">Glass</option>
+                <option value="E-Waste">E-Waste</option>
+                <option value="Cardboard">Cardboard</option>
+                <option value="Rubber">Rubber</option>
+                <option value="Textile">Textile</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Price, Quantity, Unit -->
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="price">Price (₹ in INR) *</label>
+              <input type="number" id="price" class="form-input" placeholder="e.g. 650" min="1" step="any" required>
+            </div>
+
+            <div class="flex gap-2">
+              <div class="form-group" style="flex: 2;">
+                <label class="form-label" for="quantity">Available Quantity *</label>
+                <input type="number" id="quantity" class="form-input" placeholder="e.g. 100" min="1" step="any" required>
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label class="form-label" for="unit">Unit *</label>
+                <select id="unit" class="form-select-full" required>
+                  <option value="kg">kg</option>
+                  <option value="ton">ton</option>
+                  <option value="piece">piece</option>
+                  <option value="bundle">bundle</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Location & Seller Name -->
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="location">Pickup Location (City / Hub) *</label>
+              <input type="text" id="location" class="form-input" placeholder="e.g. Chennai" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="sellerName">Seller / Business Name</label>
+              <input type="text" id="sellerName" class="form-input" placeholder="e.g. Rajesh Recycling Hub">
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label class="form-label" for="description">Material Description &amp; Specifications</label>
+            <textarea id="description" rows="3" class="form-textarea" placeholder="Detail purity grade, moisture, contamination levels, packaging type (baled, loose, barrels)..."></textarea>
+          </div>
+
+          <!-- Image URL, Upload & Preset Selector -->
+          <div class="form-group">
+            <label class="form-label">Product Image</label>
+            
+            <div class="flex gap-2 mb-2 flex-wrap">
+              <div style="flex: 1; min-width: 240px;">
+                <label class="text-xs text-muted" for="imageUrl">Image URL / Asset Path</label>
+                <input type="text" id="imageUrl" class="form-input" placeholder="assets/images/prod-copper-scrap.jpg or https://..." value="assets/images/prod-plastic-bottles.jpg">
+              </div>
+              <div style="flex: 1; min-width: 240px;">
+                <label class="text-xs text-muted" for="imageFileInput">Or Upload from Device</label>
+                <input type="file" id="imageFileInput" accept="image/*" class="form-input" onchange="handleFileUpload(event)">
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-xs text-muted">Quick Presets:</span>
+              <button type="button" class="btn btn-xs btn-outline" onclick="selectPresetImage('assets/images/prod-plastic-bottles.jpg')">Plastic</button>
+              <button type="button" class="btn btn-xs btn-outline" onclick="selectPresetImage('assets/images/prod-copper-scrap.jpg')">Copper</button>
+              <button type="button" class="btn btn-xs btn-outline" onclick="selectPresetImage('assets/images/prod-aluminium-scrap.jpg')">Aluminium</button>
+              <button type="button" class="btn btn-xs btn-outline" onclick="selectPresetImage('assets/images/prod-cardboard-bales.jpg')">Cardboard</button>
+              <button type="button" class="btn btn-xs btn-outline" onclick="selectPresetImage('assets/images/prod-glass-bottles.jpg')">Glass</button>
+              <button type="button" class="btn btn-xs btn-outline" onclick="selectPresetImage('assets/images/prod-electronic-scrap.jpg')">E-Waste</button>
+              <button type="button" class="btn btn-xs btn-outline" onclick="selectPresetImage('assets/images/prod-paper-scrap.jpg')">Paper</button>
+              <button type="button" class="btn btn-xs btn-outline" onclick="selectPresetImage('assets/images/prod-rubber-scrap.jpg')">Rubber</button>
+              <button type="button" class="btn btn-xs btn-outline" onclick="selectPresetImage('assets/images/prod-textile-scrap.jpg')">Textile</button>
+            </div>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="flex items-center gap-3 p-3 mb-4" style="background: var(--bg-page); border: 1px dashed var(--border-light); border-radius: var(--radius-md);">
+            <img id="imagePreview" src="assets/images/prod-plastic-bottles.jpg" alt="Preview" style="width: 56px; height: 56px; object-fit: cover; border-radius: 6px;">
+            <div>
+              <span class="text-xs text-muted">Selected Image Preview</span>
+              <p class="text-xs" id="imagePreviewNote">Verified scrap photo asset selected</p>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center mt-6">
+            <a href="my-listings.html" class="btn btn-outline">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-lg">Publish Listing</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 WasteMart — "Turn Waste Into Value". All rights reserved.</p>
+        <p><a href="index.html" class="text-green">Back to Home</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      protectPage(['seller', 'admin']);
+      const user = getCurrentUser();
+      if (user) {
+        const sellerInput = document.getElementById('sellerName');
+        const locInput = document.getElementById('location');
+        if (sellerInput && !sellerInput.value) sellerInput.value = user.name || '';
+        if (locInput && !locInput.value) locInput.value = user.location || 'Chennai';
+      }
+    });
+
+    function selectPresetImage(path) {
+      const imgInput = document.getElementById('imageUrl');
+      const imgPreview = document.getElementById('imagePreview');
+      if (imgInput) imgInput.value = path;
+      if (imgPreview) imgPreview.src = path;
+      const note = document.getElementById('imagePreviewNote');
+      if (note) note.textContent = 'Preset scrap photo selected';
+    }
+
+    function handleCategoryChange(category) {
+      const defaultImg = CATEGORY_DEFAULT_IMAGES[category] || 'assets/images/prod-plastic-bottles.jpg';
+      selectPresetImage(defaultImg);
+    }
+
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (file.size > 2 * 1024 * 1024) {
+        showToast('Image file exceeds 2MB limit. Please choose a smaller photo or preset.', 'warning');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const dataUrl = e.target.result;
+        document.getElementById('imageUrl').value = dataUrl;
+        document.getElementById('imagePreview').src = dataUrl;
+        const note = document.getElementById('imagePreviewNote');
+        if (note) note.textContent = `Custom device upload: ${file.name}`;
+        showToast('Photo uploaded successfully!', 'success');
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>

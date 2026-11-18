@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — WasteMart</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <svg class="brand-logo-icon" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="16" fill="#10b981"/>
+          <path d="M16 8C22 8 25 13 25 18C25 24 20 25 15 25C10 25 8 21 8 16C8 11 11 8 16 8Z" fill="#ffffff"/>
+          <path d="M13 21C16 17 19 14 23 11" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        Waste<span>Mart</span>
+      </a>
+
+      <nav class="nav-menu" id="mainNav"></nav>
+
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-backdrop" id="mobileBackdrop" onclick="toggleMobileNav()"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="brand-logo">Waste<span>Mart</span></span>
+      <button class="mobile-drawer-close" onclick="toggleMobileNav()">&times;</button>
+    </div>
+    <nav class="mobile-nav-links" id="mobileNavLinks"></nav>
+  </div>
+
+  <main class="py-6">
+    <div class="container">
+      <div class="dashboard-header">
+        <div class="dashboard-title-wrap">
+          <div class="flex items-center gap-2">
+            <h1>Workspace Dashboard</h1>
+            <span id="dashboardUserRoleBadge" class="badge">ROLE</span>
+          </div>
+          <p class="dashboard-user-greeting" id="dashboardUserGreeting">Welcome back!</p>
+        </div>
+        <div class="flex gap-2">
+          <a href="shop.html" class="btn btn-outline btn-sm">Explore Waste</a>
+          <a href="sell.html" class="btn btn-primary btn-sm" id="dashboardSellBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Sell Waste
+          </a>
+        </div>
+      </div>
+
+      <!-- 1. SELLER DASHBOARD VIEW -->
+      <div id="sellerDashboardView" style="display: none;">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Total Listings</span>
+              <div class="stat-value" id="sellerTotalListings">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-blue">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Active Listings</span>
+              <div class="stat-value" id="sellerActiveListings">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-amber">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Total Orders</span>
+              <div class="stat-value" id="sellerTotalOrders">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Completed Orders</span>
+              <div class="stat-value" id="sellerCompletedOrders">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-rose">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Total Sales (₹)</span>
+              <div class="stat-value" id="sellerTotalSales">₹0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Listings Section -->
+        <div class="dashboard-section-card">
+          <div class="section-card-header">
+            <h3>My Waste Listings</h3>
+            <a href="my-listings.html" class="btn btn-outline btn-xs">View All Listings</a>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Material</th>
+                  <th>Price / Unit</th>
+                  <th>Available Stock</th>
+                  <th>Status</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="sellerRecentListingsBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recent Orders Section -->
+        <div class="dashboard-section-card">
+          <div class="section-card-header">
+            <h3>Orders Received for My Materials</h3>
+            <a href="orders.html" class="btn btn-outline btn-xs">Manage All Orders</a>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Buyer</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="sellerRecentOrdersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. ADMIN DASHBOARD VIEW -->
+      <div id="adminDashboardView" style="display: none;">
+        <!-- Admin Tools Bar -->
+        <div class="flex justify-between items-center mb-4 p-3" style="background: white; border: 1px solid var(--border-light); border-radius: var(--radius-md);">
+          <div>
+            <span class="font-bold text-sm">Platform Administration Console</span>
+            <span class="text-xs text-muted" style="display: block;">Manage registered users, scrap listings moderation, and orders.</span>
+          </div>
+          <button type="button" class="btn btn-outline btn-xs" onclick="adminResetDemoData()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            Reset Factory Demo Data
+          </button>
+        </div>
+
+        <!-- Admin Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-blue">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Total Users</span>
+              <div class="stat-value" id="adminTotalUsers">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Sellers</span>
+              <div class="stat-value" id="adminTotalSellers">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-amber">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Buyers</span>
+              <div class="stat-value" id="adminTotalBuyers">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Total Listings</span>
+              <div class="stat-value" id="adminTotalProducts">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-rose">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Platform GMV</span>
+              <div class="stat-value" id="adminTotalSales">₹0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users Management Table -->
+        <div class="dashboard-section-card">
+          <div class="section-card-header">
+            <h3>Platform Registered Users</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>User / Entity</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Role</th>
+                  <th>Joined</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminUsersTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Listings Moderation Table -->
+        <div class="dashboard-section-card">
+          <div class="section-card-header">
+            <h3>Marketplace Scrap Listings Moderation</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Location</th>
+                  <th>Seller</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminListingsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- All Platform Orders -->
+        <div class="dashboard-section-card">
+          <div class="section-card-header">
+            <h3>Recent Marketplace Orders</h3>
+            <a href="orders.html" class="btn btn-outline btn-xs">Detailed Orders View</a>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Buyer</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminOrdersTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. BUYER DASHBOARD VIEW -->
+      <div id="buyerView" style="display: none;">
+        <!-- Buyer Stats -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Total Orders Placed</span>
+              <div class="stat-value" id="buyerTotalOrders">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-amber">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Pending Deliveries</span>
+              <div class="stat-value" id="buyerPendingOrders">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-box stat-icon-purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Total Spent</span>
+              <div class="stat-value" id="buyerTotalSpent">₹0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-section-card">
+          <div class="section-card-header">
+            <h3>My Recent Orders</h3>
+            <a href="orders.html" class="btn btn-outline btn-xs">View All Orders</a>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Date</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="buyerRecentOrdersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Order Detail Modal for Dashboard -->
+  <div class="modal-overlay" id="orderDetailModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Order Invoice</h3>
+        <button class="modal-close-btn" onclick="closeModal('orderDetailModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="orderDetailModalBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline btn-sm" onclick="closeModal('orderDetailModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 WasteMart — "Turn Waste Into Value". All rights reserved.</p>
+        <p><a href="index.html" class="text-green">Back to Home</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      protectPage();
+      initDashboardPage();
+    });
+  </script>
+</body>
+</html>

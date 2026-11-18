@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile — WasteMart</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <svg class="brand-logo-icon" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="16" fill="#10b981"/>
+          <path d="M16 8C22 8 25 13 25 18C25 24 20 25 15 25C10 25 8 21 8 16C8 11 11 8 16 8Z" fill="#ffffff"/>
+          <path d="M13 21C16 17 19 14 23 11" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        Waste<span>Mart</span>
+      </a>
+
+      <nav class="nav-menu" id="mainNav"></nav>
+
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-backdrop" id="mobileBackdrop" onclick="toggleMobileNav()"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="brand-logo">Waste<span>Mart</span></span>
+      <button class="mobile-drawer-close" onclick="toggleMobileNav()">&times;</button>
+    </div>
+    <nav class="mobile-nav-links" id="mobileNavLinks"></nav>
+  </div>
+
+  <main class="py-6">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> &gt; <span>User Profile</span>
+      </div>
+
+      <h1 class="text-2xl font-bold mb-6">Account Profile</h1>
+
+      <div class="profile-grid">
+        <!-- Sidebar -->
+        <div class="profile-card-sidebar">
+          <div class="profile-avatar-large" id="profileAvatar">U</div>
+          <h2 class="profile-name-large" id="profileSidebarName">User Name</h2>
+          <p class="profile-email-large" id="profileSidebarEmail">user@example.com</p>
+          <span class="badge" id="profileSidebarRoleBadge">ROLE</span>
+
+          <div class="mt-6 pt-4 border-top" style="border-top: 1px solid var(--border-light);">
+            <button type="button" class="btn btn-danger btn-sm" style="width: 100%;" onclick="logout()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              Log Out of WasteMart
+            </button>
+          </div>
+        </div>
+
+        <!-- Details Form -->
+        <div class="profile-details-card">
+          <h3>Personal &amp; Business Information</h3>
+
+          <form id="profileEditForm" onsubmit="handleProfileUpdateSubmit(event)">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="profileName">Full / Business Name</label>
+                <input type="text" id="profileName" class="form-input" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profileEmail">Email Address (Read-only)</label>
+                <input type="email" id="profileEmail" class="form-input" disabled style="background: var(--bg-page);">
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="profilePhone">Phone Number</label>
+                <input type="tel" id="profilePhone" class="form-input" placeholder="+91 98765 00000">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profileLocation">Primary Location / City</label>
+                <input type="text" id="profileLocation" class="form-input" placeholder="e.g. Chennai">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Account Role</label>
+              <input type="text" id="profileRoleText" class="form-input" disabled style="background: var(--bg-page); text-transform: capitalize;">
+            </div>
+
+            <div class="flex justify-between items-center mt-6">
+              <span class="text-xs text-muted">All updates persist locally in browser LocalStorage.</span>
+              <button type="submit" class="btn btn-primary">Save Profile Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 WasteMart — "Turn Waste Into Value". All rights reserved.</p>
+        <p><a href="index.html" class="text-green">Back to Home</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!protectPage()) return;
+      loadProfileData();
+    });
+
+    function loadProfileData() {
+      const user = getCurrentUser();
+      if (!user) return;
+
+      const avatarEl = document.getElementById('profileAvatar');
+      if (user.avatar) {
+        avatarEl.innerHTML = `<img src="${user.avatar}" alt="${user.name}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+      } else {
+        avatarEl.textContent = user.name ? user.name.charAt(0).toUpperCase() : 'U';
+      }
+      document.getElementById('profileSidebarName').textContent = user.name;
+      document.getElementById('profileSidebarEmail').textContent = user.email;
+      
+      const roleBadge = document.getElementById('profileSidebarRoleBadge');
+      roleBadge.textContent = user.userType.toUpperCase();
+      roleBadge.className = `badge badge-${user.userType}`;
+
+      document.getElementById('profileName').value = user.name || '';
+      document.getElementById('profileEmail').value = user.email || '';
+      document.getElementById('profilePhone').value = user.phone || '';
+      document.getElementById('profileLocation').value = user.location || '';
+      document.getElementById('profileRoleText').value = user.userType || '';
+    }
+
+    function handleProfileUpdateSubmit(e) {
+      e.preventDefault();
+      const user = getCurrentUser();
+      if (!user) return;
+
+      const newName = document.getElementById('profileName').value.trim();
+      const newPhone = document.getElementById('profilePhone').value.trim();
+      const newLocation = document.getElementById('profileLocation').value.trim();
+
+      user.name = newName;
+      user.phone = newPhone;
+      user.location = newLocation;
+
+      // Update in users array
+      const users = getUsers();
+      const index = users.findIndex(u => String(u.id) === String(user.id) || u.email === user.email);
+      if (index > -1) {
+        users[index].name = newName;
+        users[index].phone = newPhone;
+        users[index].location = newLocation;
+        saveUsers(users);
+      }
+
+      // Update currentUser session
+      setCurrentUser(user);
+
+      showToast('Profile updated successfully!', 'success');
+      loadProfileData();
+      renderNavbar();
+    }
+  </script>
+</body>
+</html>

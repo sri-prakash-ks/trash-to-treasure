@@ -1,0 +1,19 @@
+﻿<svg xmlns=http://www.w3.org/2000/svg viewBox=0 0 400 300 width=100% height=100%>
+  <defs>
+    <linearGradient id=alGrad x1=0% y1=0% x2=100% y2=100%>
+      <stop offset=0% stop-color=#94a3b8/>
+      <stop offset=50% stop-color=#cbd5e1/>
+      <stop offset=100% stop-color=#64748b/>
+    </linearGradient>
+  </defs>
+  <rect width=400 height=300 fill=#f8fafc/>
+  <circle cx=200 cy=140 r=100 fill=#f1f5f9/>
+  <g transform=translate(120, 55)>
+    <polygon points=20,130 90,30 140,30 70,130 fill=url(#alGrad)/>
+    <polygon points=70,130 140,30 180,45 110,145 fill=#94a3b8/>
+    <polygon points=20,130 70,130 110,145 60,145 fill=#64748b/>
+    <rect x=40 y=90 width=110 height=28 rx=4 fill=#cbd5e1 stroke=#64748b stroke-width=2/>
+    <rect x=25 y=115 width=125 height=25 rx=4 fill=#94a3b8 stroke=#475569 stroke-width=2/>
+  </g>
+  <text x=200 y=265 font-family=system-ui, sans-serif font-size=16 font-weight=700 fill=#334155 text-anchor=middle>Clean Aluminium Extrusion Scrap</text>
+</svg>
